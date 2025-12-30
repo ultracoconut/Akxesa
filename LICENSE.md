@@ -1,0 +1,3 @@
+# LICENSE
+
+## SUMO License:
