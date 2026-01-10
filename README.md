@@ -312,6 +312,70 @@ All managers are isolated and configurable at creation time.
 If you are not familiar with Remix or Polkadot smart-contract environments, you can follow the official Polkadot  
 [guide](https://docs.polkadot.com/develop/smart-contracts/dev-environments/remix/).
 
+## 🧑‍💻 Node.js Example (Read-only Access Check)
+
+SUMO can be integrated into any backend or application using a simple read-only RPC call.  
+No wallet connection, signatures, or gas payments are required.
+
+### Requirements
+- Node.js **v18+**
+- `ethers` v6
+
+```bash
+npm install ethers
+```
+
+### Example: Verify subscription access
+
+```javascript
+import { ethers } from "ethers";
+import ManagerABI from "./Manager.json" assert { type: "json" };
+
+// Paseo Asset Hub EVM RPC
+const provider = new ethers.JsonRpcProvider(
+  "https://testnet-passet-hub-eth-rpc.polkadot.io"
+);
+
+// Deployed SubscriptionManager address
+const MANAGER_ADDRESS = "0xYourManagerAddressHere";
+
+// Account to check access for
+const userAddress = "0xUserAddressHere";
+
+async function checkAccess() {
+  const manager = new ethers.Contract(
+    MANAGER_ADDRESS,
+    ManagerABI,
+    provider
+  );
+
+  const access = await manager.getAccess(userAddress);
+
+  console.log(access);
+}
+
+checkAccess();
+```
+
+### Example response
+
+```javascript
+{
+  hasAccess: true,
+  planId: 1n,
+  expiresAt: 1712345678n,
+  isOwner: false
+}
+```
+
+Numeric values are returned as `BigInt` when using ethers v6.
+
+**Notes**
+- This is a read-only call 
+- No signer or private key is required 
+- No gas is consumed 
+- All `SubscriptionManager` instances share the same ABI — only the contract address changes
+
 
 ## 📜 License
 
