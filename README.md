@@ -122,8 +122,8 @@ Each manager operates in isolation and enforces its own limits defined at creati
 
 | Concept                 | Meaning                                           | Configurable |
 |-------------------------|--------------------------------------------------|--------------|
-| Subscriptions per manager | Maximum subscriptions allowed by issuer | Limited (50,000)         |
-| Accounts per subscription | Total accounts linked to a subscription (owner included) | Limited (5)         |
+| Subscriptions per manager | Maximum subscriptions allowed by issuer | Limited (50,000) |
+| Secundary accounts per subscription | Additional non-owner accounts that can access the same subscription | Limited (5) |
 | Modifications           | Managed exclusively by issuer                    | Limited (20)    |
 | Subscription per account | An account can belong to only one subscription  | Enforced     |
 
