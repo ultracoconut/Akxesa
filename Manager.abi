@@ -13,7 +13,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "_maxAccounts",
+				"name": "_maxSecondaryAccounts",
 				"type": "uint256"
 			},
 			{
@@ -47,6 +47,16 @@
 	},
 	{
 		"inputs": [],
+		"name": "InvalidDuration",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSubscriptions",
+		"type": "error"
+	},
+	{
+		"inputs": [],
 		"name": "MaxAccountsReached",
 		"type": "error"
 	},
@@ -57,12 +67,27 @@
 	},
 	{
 		"inputs": [],
+		"name": "MaxSubscriptionsReached",
+		"type": "error"
+	},
+	{
+		"inputs": [],
 		"name": "NotIssuer",
 		"type": "error"
 	},
 	{
 		"inputs": [],
+		"name": "NotOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [],
 		"name": "NotSubscribed",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "OwnerCannotBeSecondary",
 		"type": "error"
 	},
 	{
@@ -181,25 +206,6 @@
 		"name": "authorizeAccount",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "authorizedCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -326,6 +332,49 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "getSecondaryAccounts",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "accounts",
+				"type": "address[]"
+			},
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "hasFreeSlot",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -375,7 +424,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "maxAccounts",
+		"name": "maxModifications",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -388,7 +437,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "maxModifications",
+		"name": "maxSecondaryAccounts",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -452,6 +501,11 @@
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
 			{
 				"internalType": "address",
 				"name": "account",
