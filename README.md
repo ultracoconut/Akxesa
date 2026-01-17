@@ -6,7 +6,7 @@
 
 It provides verifiable, decentralized access control using smart contracts, while remaining compatible with both Web3-native and traditional Web2 SaaS products.
 
-SUMO is built on **Polkadot Asset Hub** and is currently being tested on **Paseo PAsset Hub (testnet)**.  
+SUMO is built on **Polkadot Asset Hub** and is currently being tested on **Paseo Passet Hub (testnet)**.  
 
 ## 🎯 UX & Design Philosophy
 
@@ -122,10 +122,10 @@ Each manager operates in isolation and enforces its own limits defined at creati
 
 | Concept                 | Meaning                                           | Configurable |
 |-------------------------|--------------------------------------------------|--------------|
-| Subscriptions per manager | Maximum subscriptions allowed by issuer | Limited (50,000) |
-| Secundary accounts per subscription | Additional non-owner accounts that can access the same subscription | Limited (5) |
-| Modifications           | Managed exclusively by issuer                    | Limited (20)    |
-| Subscription per account | An account can belong to only one subscription  | Enforced     |
+| Subscriptions per manager | Maximum subscriptions allowed by issuer | No configurable (50,000) |
+| Secondary accounts per subscription | Additional non-owner accounts that can access the same subscription | Configurable (≤5) |
+| Modifications | Number of secondary account revocations | Configurable (≤20) |
+| Subscription per account | An account can belong to only one subscription  | Enforced |
 
 > Limits are defined at manager creation time via the Factory.
 
@@ -140,7 +140,7 @@ The issuer calls the Factory:
 createSubscriptionManager(
         address issuer,
         uint256 defaultDuration,
-        uint256 maxAccounts,
+        uint256 maxSecondaryAccounts,
         uint256 maxModifications
     )
 ```
@@ -148,9 +148,9 @@ Deploys a brand-new SubscriptionManager with custom limits and defaults.
 
 defaultDuration - Default subscription duration (in seconds)
 
-maxAccounts - Maximum accounts per subscription (owner included)
+maxSecondaryAccounts - Maximum secondary (non-owner) accounts per subscription
 
-maxModifications - Maximum account add/remove operations
+maxModifications - Maximum number of account revocations allowed per subscription
 
 
 ### 2. Create subscription (issuer)
@@ -209,6 +209,7 @@ SubscriptionCreated(address owner, uint256 planId, uint256 expiresAt)
 SubscriptionExtended(address owner, uint256 newExpiresAt)
 AccountAuthorized(address owner, address account)
 AccountRevoked(address owner, address account)
+IssuerChanged(address newIssuer)
 ```
 
 Applications can index these events to sync off-chain state.
@@ -255,7 +256,7 @@ You can create your own independent `SubscriptionManager` and test the full flow
 Configure MetaMask to connect to **Paseo Asset Hub (EVM)**.  
 In Metamask go to Networks and Click in Add Custom Network, fill it with this network data:
 
-**Network Name:** Paseo PassetHub  
+**Network Name:** Paseo Passet Hub  
 **Default RPC URL:** https://testnet-passet-hub-eth-rpc.polkadot.io  
 **Chain ID:** 420420422  
 **Currency symbol:** PAS  
@@ -283,7 +284,7 @@ Now you can access the contract methods.
 Call `createSubscriptionManager`, for example:
 
 - `defaultDuration`: `600` (10 minutes)
-- `maxAccounts`: `5`
+- `maxSecondaryAccounts`: `5`
 - `maxModifications`: `10`
 
 
