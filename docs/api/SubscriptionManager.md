@@ -12,13 +12,14 @@ Manages subscriptions, account authorization, plans, and access verification for
 | authorizeAccount | `address owner`, `address account` | — | Issuer only | Authorizes a secondary account. |
 | revokeAccount | `address owner`, `address account` | — | Issuer only | Revokes a secondary account and consumes a modification. |
 | changeIssuer | `address newIssuer` | — | Issuer only | Updates the issuer. |
+| changePlan | `address owner`, `uint256 newPlanId` | — | Issuer only | Changes plan for an existing subscription. |
 
 ### 2. Read-Only Functions
 
 | Function | Inputs | Outputs | Permissions | Description |
 |---------|--------|---------|-------------|-------------|
 | getAccess | `address account` | `bool`, `uint256`, `uint256`, `bool` | Anyone | Returns access and plan information. |
-| getSecondaryAccounts | `address owner` | `address[]`, `bool` | Anyone | Returns linked secondary accounts. |
+| getSecondaryAccounts | `address owner` | `address[]` | Anyone | Returns linked secondary accounts. |
 | hasFreeSlot | `address owner` | `bool` | Anyone | Checks if more secondary accounts can be added. |
 
 ### 3. Auto-Generated Getters (Public State Variables)
@@ -47,4 +48,5 @@ Manages subscriptions, account authorization, plans, and access verification for
 | AccountAuthorized | `address owner`, `address account` | Emitted when a secondary account is authorized under an owner's subscription. |
 | AccountRevoked | `address owner`, `address account` | Emitted when a secondary account is revoked from an owner's subscription. |
 | IssuerChanged | `address newIssuer` | Emitted when the issuer of the SubscriptionManager is changed. |
+| PlanChanged | `address owner`, `uint256 oldPlanId`, `uint256 newPlanId` | Emitted when a subscription changes its plan. |
 
