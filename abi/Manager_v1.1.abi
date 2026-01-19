@@ -52,6 +52,11 @@
 	},
 	{
 		"inputs": [],
+		"name": "InvalidPlanId",
+		"type": "error"
+	},
+	{
+		"inputs": [],
 		"name": "InvalidSubscriptions",
 		"type": "error"
 	},
@@ -68,6 +73,11 @@
 	{
 		"inputs": [],
 		"name": "MaxSubscriptionsReached",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotAuthorized",
 		"type": "error"
 	},
 	{
@@ -158,6 +168,31 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "oldPlanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "newPlanId",
+				"type": "uint256"
+			}
+		],
+		"name": "PlanChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "planId",
 				"type": "uint256"
 			},
@@ -217,6 +252,24 @@
 			}
 		],
 		"name": "changeIssuer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "newPlanId",
+				"type": "uint256"
+			}
+		],
+		"name": "changePlan",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -342,11 +395,6 @@
 				"internalType": "address[]",
 				"name": "accounts",
 				"type": "address[]"
-			},
-			{
-				"internalType": "bool",
-				"name": "active",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
