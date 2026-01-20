@@ -27,4 +27,5 @@ Use this as a reference for API integration and frontend error handling.
 | `AlreadySubscribed` | Owner already has a subscription. |
 | `InvalidDuration` | Duration provided is 0 or invalid. |
 | `OwnerCannotBeSecondary` | Owner account cannot be added as secondary. |
+| `InvalidPlanId` | Provided planId is invalid. It must be greater than 0 and different from the current planId. |
 
