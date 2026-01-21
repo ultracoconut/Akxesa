@@ -132,9 +132,9 @@ Each manager operates in isolation and enforces its own limits defined at creati
 
 ## 🚀 Basic Flow
 
-### 1. Create SubscriptionManager (issuer)
+### 1. Create SubscriptionManager (anyone)
 
-The issuer calls the Factory:
+Any account can call the Factory to deploy a new SubscriptionManager:
 
 ```solidity
 createSubscriptionManager(
@@ -146,11 +146,13 @@ createSubscriptionManager(
 ```
 Deploys a brand-new SubscriptionManager with custom limits and defaults.
 
-defaultDuration - Default subscription duration (in seconds)
+- issuer - The account that will be authorized to manage subscriptions.
+  
+- defaultDuration - Default subscription duration (in seconds)
+  
+- maxSecondaryAccounts - Maximum secondary (non-owner) accounts per subscription
 
-maxSecondaryAccounts - Maximum secondary (non-owner) accounts per subscription
-
-maxModifications - Maximum number of account revocations allowed per subscription
+- maxModifications - Maximum number of account revocations allowed per subscription
 
 
 ### 2. Create subscription (issuer)
@@ -283,12 +285,13 @@ Now you can access the contract methods.
 #### 6. Create a Subscription Manager
 Call `createSubscriptionManager`, for example:
 
+- `issuer`: `Address authorized` to operate the manager
 - `defaultDuration`: `600` (10 minutes)
 - `maxSecondaryAccounts`: `5`
 - `maxModifications`: `10`
 
-
-This deploys a **brand-new SubscriptionManager contract**, fully independent and owned by your issuer address.
+This deploys a **brand-new, independent SubscriptionManager contract**.  
+The provided `issuer` address is **granted exclusive permission to manage subscriptions**
 
 #### 7. Interact with your Manager
 After creating a SubscriptionManager, copy the returned **manager contract address**.
