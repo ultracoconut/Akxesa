@@ -369,7 +369,6 @@ checkAccess();
   isOwner: false
 }
 ```
-
 Numeric values are returned as `BigInt` when using ethers v6.
 
 **Notes**
@@ -377,6 +376,16 @@ Numeric values are returned as `BigInt` when using ethers v6.
 - No signer or private key is required 
 - No gas is consumed 
 - All `SubscriptionManager` instances share the same ABI — only the contract address changes
+
+**More examples in** [Getting Started](docs/getting-started.md) 
+
+
+
+## 📚 API Documentation
+Complete smart contract interface reference
+- [Factory API](docs/api/factory-api.md)
+- [Manager API](docs/api/manager-api.md)
+- [Error Reference](docs/api/errors.md)
 
 
 ## 📜 License
