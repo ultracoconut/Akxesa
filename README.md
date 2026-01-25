@@ -379,7 +379,7 @@ Numeric values are returned as `BigInt` when using ethers v6.
 - No gas is consumed 
 - All `SubscriptionManager` instances share the same ABI — only the contract address changes
 
-**More examples in** [Getting Started](docs/getting-started.md) 
+**More examples in** [Getting Started](docs/getting-started/interactions-with-manager.md) 
 
 
 
