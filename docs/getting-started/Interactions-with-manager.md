@@ -1,62 +1,19 @@
 # Usage Examples
 
+Author: @Ultracoconut  
+License: MIT  
+Note: This is example/demo code. It may contain bugs and is not production-ready. Use at your own risk
+
+### Overview
+This guide demonstrates how to interact with the SUMO `SubscriptionManager` smart contract using **Node** and **ethers v6**.  
+It includes examples for creating subscriptions and verifying subscription access.
+
 ### Requirements
 - Node.js **v18+**
 - `ethers` v6
 ```bash
 npm install ethers
 ```
-### Verify subscription access
-
-```javascript
-import { ethers } from "ethers";
-import ManagerABI from "./Manager.json" assert { type: "json" };
-
-// Paseo Asset Hub EVM RPC
-const provider = new ethers.JsonRpcProvider(
-  "https://testnet-passet-hub-eth-rpc.polkadot.io"
-);
-
-// Deployed SubscriptionManager address
-const MANAGER_ADDRESS = "0xYourManagerAddressHere";
-
-// Account to check access for
-const userAddress = "0xUserAddressHere";
-
-async function checkAccess() {
-  const manager = new ethers.Contract(
-    MANAGER_ADDRESS,
-    ManagerABI,
-    provider
-  );
-
-  const access = await manager.getAccess(userAddress);
-
-  console.log(access);
-}
-
-checkAccess();
-```
-
-**Example response**
-
-```javascript
-{
-  hasAccess: true,
-  planId: 1n,
-  expiresAt: 1712345678n,
-  isOwner: false
-}
-```
-
-Numeric values are returned as `BigInt` when using ethers v6.
-
-**Notes**
-- This is a read-only call 
-- No signer or private key is required 
-- No gas is consumed 
-- All `SubscriptionManager` instances share the same ABI — only the contract address changes
-
 
 ### Create a Subscription
 
@@ -99,16 +56,63 @@ async function createSubscription() {
     planId,
     duration
   );
-
   console.log("Transaction sent:", tx.hash);
 
   const receipt = await tx.wait();
   console.log("Subscription created in block:", receipt.blockNumber);
 }
-
 createSubscription().catch(console.error);
 
 ```
 **Notes**
 - Requires private key for signing
 - State-changing transaction (gas required)
+
+
+### Verify subscription access
+
+```javascript
+import { ethers } from "ethers";
+import ManagerABI from "./Manager.json" assert { type: "json" };
+
+// Paseo Asset Hub EVM RPC
+const provider = new ethers.JsonRpcProvider(
+  "https://testnet-passet-hub-eth-rpc.polkadot.io"
+);
+
+// Deployed SubscriptionManager address
+const MANAGER_ADDRESS = "0xYOUR_MANAGER_ADDRESS_HERE";
+
+// Account to check access for
+const userAddress = "0xUSER_ADDRESS_HERE";
+
+async function checkAccess() {
+  const manager = new ethers.Contract(
+    MANAGER_ADDRESS,
+    ManagerABI,
+    provider
+  );
+
+  const access = await manager.getAccess(userAddress);
+  console.log(access);
+}
+checkAccess();
+```
+
+**Example response**
+```javascript
+{
+  hasAccess: true,
+  planId: 1n,
+  expiresAt: 1712345678n,
+  isOwner: false
+}
+```
+
+Numeric values are returned as `BigInt` when using ethers v6.
+
+**Notes**
+- This is a read-only call 
+- No signer or private key is required 
+- No gas is consumed 
+- All `SubscriptionManager` instances share the same ABI — only the contract address changes
