@@ -342,10 +342,10 @@ const provider = new ethers.JsonRpcProvider(
 );
 
 // Deployed SubscriptionManager address
-const MANAGER_ADDRESS = "0xYourManagerAddressHere";
+const MANAGER_ADDRESS = "0xYOUR_MANAGER_ADDRESS_HERE";
 
 // Account to check access for
-const userAddress = "0xUserAddressHere";
+const userAddress = "0xUSER_ADDRESS_HERE";
 
 async function checkAccess() {
   const manager = new ethers.Contract(
@@ -355,7 +355,6 @@ async function checkAccess() {
   );
 
   const access = await manager.getAccess(userAddress);
-
   console.log(access);
 }
 
