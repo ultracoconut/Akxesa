@@ -6,7 +6,7 @@ Note: This is example/demo code. It may contain bugs and is not production-ready
 
 ## Overview
 Maps Stripe price / plan identifiers to on-chain subscription manager parameters.  
-This map acts as the single source of truth between Stripe billing and the SUMO manager smart contract.
+This map acts as the single source of truth between Stripe billing and the Akxesa manager smart contract.
 
 ## Prerequisites
 - `planId` must match `uint256` expected by the manager contract
@@ -38,7 +38,7 @@ const PLAN_MAP = {
 };
 
 
-// Resolve a Stripe price ID to SUMO subscription parameters
+// Resolve a Stripe price ID to Akxesa subscription parameters
 function resolvePlan(stripePriceId) {
   const plan = PLAN_MAP[stripePriceId];
 
