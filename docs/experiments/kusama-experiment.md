@@ -1,5 +1,5 @@
 ----Unfinished------
-# Kusama Experiment (SUMO)
+# Kusama Experiment (Akxesa)
 
 ## Disclaimer
 ⚠️ Experimental deployment on Kusama.
