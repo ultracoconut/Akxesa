@@ -5,7 +5,7 @@ License: MIT
 Note: This is example/demo code. It may contain bugs and is not production-ready. Use at your own risk
 
 ### Overview
-This guide demonstrates how to interact with the SUMO `SubscriptionManager` smart contract using **Node** and **ethers v6**.  
+This guide demonstrates how to interact with the Akxesa `SubscriptionManager` smart contract using **Node** and **ethers v6**.  
 It includes examples for creating subscriptions and verifying subscription access.
 
 ### Requirements
