@@ -1,6 +1,6 @@
 # LICENSE
 
-## SUMO License:
+## Akxesa License:
 
 Copyright © 2026 @Ultracoconut
 
