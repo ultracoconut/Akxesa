@@ -45,7 +45,7 @@ Issuer: Manages subscriptions
 
 Owner: Primary subscription account
 
-Secundary account: Can access service, linked to owner
+Secondary account: Can access service, linked to owner
 
 Visual placeholder: Diagram showing relationship between Issuer → Subscription → Users
 
