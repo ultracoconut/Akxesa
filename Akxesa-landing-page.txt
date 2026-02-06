@@ -7,7 +7,7 @@ Headline:
 Subheadline:
 “On-chain subscription and licensing for SaaS platforms, without wallet friction or gas costs for your users.”
 
-CTA button: “Try on Testnet” → link to testnet
+CTA button: “Start Building on Testnet” → link to testnet
 
 Visual placeholder: Illustration of users accessing SaaS without blockchain friction
 
@@ -59,9 +59,9 @@ Multi-device access control
 
 Visual placeholder: Icons or small illustrations for each use case
 
-6️⃣ CTA / Try it Now
+6️⃣ CTA / Ready to decentralize your SaaS access?
 
-Button: “Try Akxesa on Testnet”
+Button: “Build on Testnet Now”
 
 Subtext: “Create your SubscriptionManager and test the full flow using Remix and MetaMask.”
 
