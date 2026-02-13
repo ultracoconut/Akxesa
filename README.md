@@ -21,8 +21,6 @@ To enable a broader reach and a better user experience:
 
 All on-chain operations are executed by the SaaS service itself, which acts as the issuer and covers gas costs when interacting with the smart contracts.
 
-Users simply connect a wallet to verify access.
-
 **This model preserves:**
 - On-chain verifiability
 - Transparency and auditability
@@ -32,8 +30,6 @@ Users simply connect a wallet to verify access.
 - Wallet friction
 - Gas management
 - Web3 onboarding complexity
-
-Akxesa acts as an on-chain access layer, not an intermediary.
 
 ## 🔑 Account Model
 
@@ -51,8 +47,7 @@ This separation keeps Akxesa contracts minimal, auditable, and chain-native, whi
 - The Factory deploys managers dynamically using embedded bytecode
 - Each manager is fully independent and immutable
 - An **issuer account** (typically the SaaS backend or operator) controls all subscription state
-- End users never sign transactions - they only connect accounts for access checks
-
+- End users never sign transactions
 
 ## 🧩 Roles
 
@@ -69,7 +64,7 @@ The issuer can:
 
 - Create subscriptions
 - Extend subscriptions
-- Authorize or revoke accounts
+- Authorize or revoke secondary accounts
 - Change the issuer address
 
 
@@ -79,16 +74,10 @@ Each subscription has an `owner` account:
 
 - Identifies the primary account of the subscription
 - Automatically authorized
-- **Does not sign transactions**
 
+### Secondary Account
 
-### Authorized account
-
-Any blockchain account authorized under a subscription:
-
-- Can access the service
-- Cannot modify subscriptions
-- Access is verified on-chain via `getAccess`
+Additional accounts linked to a subscription.
 
 
 ## 🏭 Subscription Manager Factory
@@ -104,7 +93,7 @@ Any blockchain account authorized under a subscription:
 A Subscription Manager is an independent on-chain access control system.  
 It manages:
 - Subscription ownership
-- Account authorization
+- Secondary account authorization
 - Plan assignment
 - Expiration logic
 
