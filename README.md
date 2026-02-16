@@ -6,7 +6,7 @@
 
 It provides verifiable, decentralized access control using smart contracts, while remaining compatible with both Web3-native and traditional Web2 SaaS products.
 
-Akxesa is built on **Polkadot Asset Hub** and is currently being tested on **Paseo Passet Hub (testnet)**.  
+Akxesa is built on **Polkadot Asset Hub** and is currently being tested on **Paseo Asset Hub (testnet)**.  
 
 ## 🎯 UX & Design Philosophy
 
@@ -247,15 +247,15 @@ You can create your own independent `SubscriptionManager` and test the full flow
 Configure MetaMask to connect to **Paseo Asset Hub (EVM)**.  
 In Metamask go to Networks and Click in Add Custom Network, fill it with this network data:
 
-**Network Name:** Paseo Passet Hub  
-**Default RPC URL:** https://testnet-passet-hub-eth-rpc.polkadot.io  
-**Chain ID:** 420420422  
+**Network Name:** Paseo Asset Hub  
+**Default RPC URL:** https://eth-rpc-testnet.polkadot.io/  
+**Chain ID:** 420420417   
 **Currency symbol:** PAS  
-**Block explorer URL:** https://passet-hub.subscan.io/
+**Block explorer URL:** https://assethub-paseo.subscan.io/
 
 #### 2. Get test tokens
 Request PAS test tokens from the Polkadot faucet using your MetaMask address:  
-[Faucet](https://faucet.polkadot.io/?parachain=1111)
+[Faucet](https://faucet.polkadot.io/)
 
 #### 3. Open Remix
 Go to https://remix.polkadot.io/. and connect MetaMask.
@@ -267,7 +267,7 @@ Add `Factory.abi` and `Manager.abi` to your Remix directory
 In Remix, select `Factory.abi` in your directory
 
 Select Deploy & run transactions in the left menu, use **"At Address"** and attach this contract (v1.1) address:  
-`0x58c102115229aC4B72A1a70C2a77a431FD5053ED`
+`0x83448DC5A6Ac6975204B0409D3374F0F65f716B9`
 
 Now you can access the contract methods.
 
