@@ -23,7 +23,7 @@ import ManagerABI from "./Manager.json" assert { type: "json" };
 
 // Paseo Asset Hub EVM RPC
 const provider = new ethers.JsonRpcProvider(
-  "https://testnet-passet-hub-eth-rpc.polkadot.io"
+  "https://eth-rpc-testnet.polkadot.io/"
 );
 
 // Issuer private key
@@ -77,7 +77,7 @@ import ManagerABI from "./Manager.json" assert { type: "json" };
 
 // Paseo Asset Hub EVM RPC
 const provider = new ethers.JsonRpcProvider(
-  "https://testnet-passet-hub-eth-rpc.polkadot.io"
+  "https://eth-rpc-testnet.polkadot.io/"
 );
 
 // Deployed SubscriptionManager address
