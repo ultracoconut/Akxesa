@@ -1,8 +1,23 @@
-You can try **Akxesa - Subscription Manager On-chain** without accessing the source code.
+## Manual Interaction (Advanced)
 
-A **SubscriptionManagerFactory** is already deployed on-chain.  
-You can create your own independent `SubscriptionManager` and test the full flow using **Remix** and **MetaMask**.
+This guide explains how to interact directly with deployed Akxesa smart contracts using Remix and MetaMask.
 
+This document is intended for low-level testing, auditing, and development purposes.
+
+If you simply want to create and manage a SubscriptionManager, use the Akxesa app instead:
+
+👉 https://www.akxesa.com/app
+
+### Overview
+
+A `SubscriptionManagerFactory` contract is already deployed on testnet.
+
+Using Remix, you can:
+
+- Deploy your own independent `SubscriptionManager`
+- Interact directly with contract methods
+- Test subscription creation and access verification
+- Inspect raw on-chain behavior
 
 ### Test environment
 
@@ -11,7 +26,7 @@ You can create your own independent `SubscriptionManager` and test the full flow
 - **Wallet:** MetaMask (recommended)
 - **IDE:** Remix
 
-### How to test
+### Step-by-Step Manual Interaction
 
 #### 1. Configure MetaMask
 Configure MetaMask to connect to **Paseo Asset Hub (EVM)**.  
