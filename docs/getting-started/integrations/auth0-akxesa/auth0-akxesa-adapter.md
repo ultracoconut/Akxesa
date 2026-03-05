@@ -6,13 +6,13 @@ Note: This is example/demo code. It may contain bugs and is not production-ready
 
 ### Overview
 
-This script automatically maps Auth0 users to Akxesa on-chain addresses
+This script automatically assigns Auth0 users an Akxesa on-chain address upon registration.
 
-- Run this as an Auth0 PostLogin Action
+- Run this as an Auth0 **Post-User-Registration Hook**
 
 - Auth0 users get a new random H160 address (Ethereum-style) as their Akxesa owner address
 
-- Existing mappings are preserved
+- Each user gets a unique address only once
 
 ### Features
 
@@ -27,22 +27,17 @@ This script automatically maps Auth0 users to Akxesa on-chain addresses
 ```js
 const { randomBytes, hexlify, getAddress } = require("ethers");
 
-exports.onExecutePostLogin = async (event, api) => {
-  const userEmail = event.user.email;
+exports.onExecutePostUserRegistration = async (event, api) => {
+  const userId = event.user.user_id;
 
-  // Already mapped → do nothing
-  if (event.user.app_metadata?.akxesa_address) return;
-
-  // Generate deterministic Ethereum-like identifier
+  // Generate Ethereum-like identifier
   const raw = hexlify(randomBytes(20));
   const akxesaAddress = getAddress(raw);
 
-  // Persist mapping
+  // Persist mapping in app_metadata
   api.user.setAppMetadata("akxesa_address", akxesaAddress);
 
-  console.log(
-    `Akxesa identity created: ${userEmail} → ${akxesaAddress}`
-  );
+  console.log(`Akxesa identity created: Auth0 ID ${userId} → ${akxesaAddress}`);
 };
 ```
 
