@@ -33,13 +33,14 @@ All on-chain operations are executed by the SaaS service itself, which acts as t
 
 ## 🔑 Account Model
 
-Akxesa smart contracts operate exclusively on `EVM address (H160)`.
+Akxesa smart contracts operate exclusively on `EVM address (H160)`. 
 
 The contracts themselves only verify access rights for a given on-chain address.
-
 Any identity model (Web3 wallets, Substrate accounts, Web2 users, custodial accounts, or external systems) can be supported by the application layer, as long as it resolves to an EVM-compatible address when interacting with the contracts.
 
-This separation keeps Akxesa contracts minimal, auditable, and chain-native, while allowing applications full flexibility over identity and UX design.  
+For Web2 authentication systems (Auth0, Firebase, Okta, Keycloak, etc.), applications can use the **Akxesa Universal ID Adapter**, which deterministically derives an H160 address from a unique user identifier.
+
+This separation keeps Akxesa contracts minimal, auditable, and chain-native, while allowing applications full flexibility over identity, authentication providers, and UX design.
 
 ## 🧠 High-level architecture
 
