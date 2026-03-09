@@ -18,7 +18,7 @@ Manages subscriptions, account authorization, plans, and access verification for
 
 | Function | Inputs | Outputs | Permissions | Description |
 |---------|--------|---------|-------------|-------------|
-| getAccess | `address account` | `bool`, `uint256`, `uint256`, `bool` | Anyone | Returns access and plan information. |
+| getAccess | `address account` | `bool hasAccess`, `uint256 expiresAt`, `uint256 planId`, `bool isOwner` | Anyone | Returns access status, expiration timestamp, plan ID, and whether the account is the subscription owner. Secondary accounts inherit access from their linked owner. |  
 | getSecondaryAccounts | `address owner` | `address[]` | Anyone | Returns linked secondary accounts. |
 | hasFreeSlot | `address owner` | `bool` | Anyone | Checks if more secondary accounts can be added. |
 
