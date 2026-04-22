@@ -1,161 +1,99 @@
 # Akxesa - The source of truth for SaaS access
 
-## About Akxesa
+Sell SaaS subscriptions with verifiable access control.
 
-**Akxesa** is an on-chain subscription and licensing system for SaaS platforms.
+Akxesa lets you eliminate your subscription database and verify access on-chain while keeping your existing backend architectures and authentication providers.
 
-It provides verifiable, decentralized access control using smart contracts, while remaining compatible with both Web3-native and traditional Web2 SaaS products.
+## ⚡  Quickstart (5 minutes)
 
-Akxesa is built on **Polkadot Asset Hub** and is currently being tested on **Paseo Asset Hub (testnet)**.  
+1. Create your SubscriptionManager → https://www.akxesa.com/app  
+2. Derive a deterministic address from your user ID (Auth0, Firebase, etc.)
+3. Call `getAccess(address)` from your backend  
+
+That’s it. No subscription database required.
+
+## 📖 About Akxesa
+
+Akxesa is a deterministic subscription and licensing system designed for SaaS platforms.
+
+It provides verifiable access control using smart contracts, while remaining fully compatible with traditional authentication systems and backend architectures.
+
+Akxesa is built on Polkadot Asset Hub and currently runs on Paseo Asset Hub (testnet).
+
 
 ## 🎯 UX & Design Philosophy
 
-Akxesa is designed for real-world SaaS adoption, not just Web3-native users.
+Akxesa is designed for real-world SaaS adoption.
 
-The system intentionally removes common blockchain UX barriers while preserving on-chain guarantees.  
-To enable a broader reach and a better user experience:
+End users do not need:
+- wallets  
+- tokens  
+- transaction signing  
 
-- End users do **not** need to hold tokens
-- End users do **not** need to sign transactions
-- No gas payments are required from users
+All operations are handled by the SaaS backend (issuer), which interacts with the contracts and covers execution costs.
 
-All on-chain operations are executed by the SaaS service itself, which acts as the issuer and covers gas costs when interacting with the smart contracts.
+This preserves:
+- Deterministic access control  
+- Auditability  
+- Verifiable state  
 
-**This model preserves:**
-- On-chain verifiability
-- Transparency and auditability
-- Deterministic access control
-
-**While removing:**
-- Wallet friction
-- Gas management
-- Web3 onboarding complexity
+While removing:
+- User friction  
+- Wallet dependency  
+- Gas management complexity  
 
 ## 🔑 Account Model
 
-Akxesa smart contracts operate exclusively on `EVM address (H160)`. 
+Akxesa contracts operate on EVM addresses (H160).
 
-The contracts themselves only verify access rights for a given on-chain address.
-Any identity model (Web3 wallets, Substrate accounts, Web2 users, custodial accounts, or external systems) can be supported by the application layer, as long as it resolves to an EVM-compatible address when interacting with the contracts.
+Any identity system (Auth0, Firebase, custom backends, etc.) can be used, as long as it resolves deterministically to an address.
 
-For Web2 authentication systems (Auth0, Firebase, Okta, Keycloak, etc.), applications can use the **Akxesa Universal ID Adapter**, which deterministically derives an H160 address from a unique user identifier.
+The **Akxesa Universal ID Adapter** allows deriving an address from a stable user identifier.
 
-This separation keeps Akxesa contracts minimal, auditable, and chain-native, while allowing applications full flexibility over identity, authentication providers, and UX design.
+This keeps contracts minimal and allows full flexibility at the application layer.
 
-## 🧠 High-level architecture
 
-- Each SaaS deploys **one SubscriptionManager**, created via the Factory
-- The Factory deploys managers dynamically using embedded bytecode
-- Each manager is fully independent and immutable
-- An **issuer account** (typically the SaaS backend or operator) controls all subscription state
-- End users never sign transactions
+## 🧠 Architecture
 
+- Each SaaS gets its own isolated subscription system (SubscriptionManager)  
+- Managers are deployed via a factory and are immutable  
+- The backend (issuer) controls all subscription state  
+- End users never interact with the system directly
+  
 ## 🧩 Roles
 
-### Issuer
+### Issuer (SaaS backend)
+Controls subscription state:
+- Create subscriptions  
+- Extend subscriptions  
+- Manage access  
 
-The issuer is the authority for a given `SubscriptionManager`.
+### Subscriber (owner)
+Primary account of a subscription.
 
-Typically:
-
-- Backend SaaS service
-- SaaS Operator wallet
-
-The issuer can:
-
-- Create subscriptions
-- Extend subscriptions
-- Authorize or revoke secondary accounts
-- Change the issuer address
-
-
-### Owner
-
-Each subscription has an `owner` account:
-
-- Identifies the primary account of the subscription
-- Automatically authorized
-
-### Secondary Account
-
-Additional accounts linked to a subscription.
-
-
-## 🏭 Subscription Manager Factory
-
-- Deploys a brand-new `SubscriptionManager`
-- Emits `ManagerCreated`
-- Returns the address of the new manager
-- Each manager is fully independent and owned by its issuer
-
-
-## 📦 Subscription Manager
-
-A Subscription Manager is an independent on-chain access control system.  
-It manages:
-- Subscription ownership
-- Secondary account authorization
-- Plan assignment
-- Expiration logic
-
-Each manager operates in isolation and enforces its own limits defined at creation time.
-
-## 🔐 Subscription Model
-
-- Each subscription is owned by a primary account
-- Additional accounts can be linked to the subscription
-- All access rules are enforced on-chain
-- Applications only need to perform read-only checks
-
-
-## 🔢 System Limits (per manager)
-
-| Concept                 | Meaning                                           | Configurable |
-|-------------------------|--------------------------------------------------|--------------|
-| Subscriptions per manager | Maximum subscriptions allowed by issuer | No configurable (50,000) |
-| Secondary accounts per subscription | Additional non-owner accounts that can access the same subscription | Configurable (≤5) |
-| Modifications | Number of secondary account revocations | Configurable (≤20) |
-| Subscription per account | An account can belong to only one subscription  | Enforced |
-
-> Limits are defined at manager creation time via the Factory.
+### Linked Accounts
+Additional accounts with shared access.
 
 
 ## 🚀 Basic Flow
 
-### 1. Create SubscriptionManager (anyone)
-
-Any account can call the Factory to deploy a new SubscriptionManager:
+### 1. Create SubscriptionManager
+Deploy a manager via the Factory:
 
 ```solidity
 createSubscriptionManager(
-        address issuer,
-        uint256 defaultDuration,
-        uint256 maxSecondaryAccounts,
-        uint256 maxModifications
-    )
+  address issuer,
+  uint256 defaultDuration,
+  uint256 maxSecondaryAccounts,
+  uint256 maxModifications
+)
 ```
-Deploys a brand-new SubscriptionManager with custom limits and defaults.
 
-- issuer - The account that will be authorized to manage subscriptions.
-  
-- defaultDuration - Default subscription duration (in seconds)
-  
-- maxSecondaryAccounts - Maximum secondary (non-owner) accounts per subscription
-
-- maxModifications - Maximum number of account revocations allowed per subscription
-
-
-### 2. Create subscription (issuer)
+### 2. Create subscription
 
 ```solidity
 createSubscription(address owner, uint256 planId, uint256 duration)
 ```
-- Creates a new subscription
-
-- Owner is automatically authorized
-
-- duration is expressed in seconds
-
 
 ### 3. Manage accounts (issuer)
 
@@ -163,8 +101,6 @@ createSubscription(address owner, uint256 planId, uint256 duration)
 authorizeAccount(address owner, address account)
 revokeAccount(address owner, address account)
 ```
-
-All account management is performed by the issuer.
 
 ### 4. Verify access (application)
 
@@ -186,46 +122,13 @@ Returns:
   ✅ No gas  
   ✅ No wallet signature
 
-## 📣 Events
-
-### Factory
-
-```solidity
-ManagerCreated(address manager, address issuer)
-```
-
-### SubscriptionManager
-
-```solidity
-SubscriptionCreated(address owner, uint256 planId, uint256 expiresAt)
-SubscriptionExtended(address owner, uint256 newExpiresAt)
-AccountAuthorized(address owner, address account)
-AccountRevoked(address owner, address account)
-IssuerChanged(address newIssuer)
-```
-
-Applications can index these events to sync off-chain state.
-
-
-## 🛡️ Security Model
-
-- Only the issuer can mutate state
-
-- No personal data stored on-chain
-
-- Fully auditable and deterministic
-
-- Immutable once deployed
-
 
 ## 🌍 Use Cases
 
-- Web3-native SaaS subscriptions
-
-- Software licensing
-
-- Multi-device access control
-
+- SaaS subscription management without a database  
+- Software licensing without centralized control  
+- Multi-device access (e.g. 5 seats per account)  
+- Shared subscription plans  
 
 ## ▶️ Getting Started
 
@@ -250,6 +153,20 @@ Complete smart contract interface reference
 - [Factory API](docs/api/factory-api.md)
 - [Manager API](docs/api/manager-api.md)
 - [Error Reference](docs/api/errors.md)
+
+
+## 🔢 System Limits
+
+These limits define how each SubscriptionManager behaves at creation time and are enforced on-chain.
+
+| Concept                 | Meaning                                           | Configurable |
+|-------------------------|--------------------------------------------------|--------------|
+| Subscriptions per manager | Maximum subscriptions allowed by issuer | Fixed (50,000) |
+| Secondary accounts per subscription | Additional non-owner accounts that can access the same subscription | Configurable (≤5) |
+| Modifications | Number of secondary account revocations | Configurable (≤20) |
+| Subscription per account | An account can belong to only one subscription  | Enforced |
+
+> Limits are defined at manager creation time via the Factory.
 
 
 ## 📜 License
