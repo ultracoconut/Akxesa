@@ -20,27 +20,20 @@ It provides verifiable access control using smart contracts, while remaining ful
 
 Akxesa is built on Polkadot Asset Hub and currently runs on Paseo Asset Hub (testnet).
 
-
-## 🎯 UX & Design Philosophy
+## 🎯 Design Principles
 
 Akxesa is designed for real-world SaaS adoption.
 
-End users do not need:
-- wallets  
-- tokens  
-- transaction signing  
+- No wallets, tokens, or user signatures  
+- Fully compatible with existing auth systems  
+- Backend-controlled (issuer handles all operations)  
 
-All operations are handled by the SaaS backend (issuer), which interacts with the contracts and covers execution costs.
+Users never interact with the system directly.
 
-This preserves:
+This provides:
 - Deterministic access control  
-- Auditability  
 - Verifiable state  
-
-While removing:
-- User friction  
-- Wallet dependency  
-- Gas management complexity  
+- No user friction  
   
 ## 🧩 Roles
 
