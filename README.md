@@ -93,7 +93,7 @@ Returns:
 
 - SaaS subscription management without a database  
 - Software licensing without centralized control  
-- Multi-device access (e.g. 5 seats per account)  
+- Multi-device access (e.g. 5 seats per subscription)  
 - Shared subscription plans  
 
 ## ▶️ Getting Started
