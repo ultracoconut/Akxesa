@@ -41,39 +41,12 @@ While removing:
 - User friction  
 - Wallet dependency  
 - Gas management complexity  
-
-## 🔑 Account Model
-
-Akxesa contracts operate on EVM addresses (H160).
-
-Any identity system (Auth0, Firebase, custom backends, etc.) can be used, as long as it resolves deterministically to an address.
-
-The **Akxesa Universal ID Adapter** allows deriving an address from a stable user identifier.
-
-This keeps contracts minimal and allows full flexibility at the application layer.
-
-
-## 🧠 Architecture
-
-- Each SaaS gets its own isolated subscription system (SubscriptionManager)  
-- Managers are deployed via a factory and are immutable  
-- The backend (issuer) controls all subscription state  
-- End users never interact with the system directly
   
 ## 🧩 Roles
 
-### Issuer (SaaS backend)
-Controls subscription state:
-- Create subscriptions  
-- Extend subscriptions  
-- Manage access  
-
-### Subscriber (owner)
-Primary account of a subscription.
-
-### Linked Accounts
-Additional accounts with shared access.
-
+- **Issuer (backend)** → controls subscription state  
+- **Subscriber (owner)** → primary account of a subscription  
+- **Linked accounts** → additional accounts with shared access  
 
 ## 🚀 Basic Flow
 
@@ -147,27 +120,17 @@ Interact directly with the contracts using Remix and MetaMask:
 
 👉 [Manual Interaction Guide](docs/getting-started/manual-interaction.md)
 
-
 ## 📚 API Documentation
 Complete smart contract interface reference
 - [Factory API](docs/api/factory-api.md)
 - [Manager API](docs/api/manager-api.md)
 - [Error Reference](docs/api/errors.md)
 
+## 📄 Technical Specification
 
-## 🔢 System Limits
+Learn how Akxesa works under the hood, including its architecture, guarantees, and system limits.
 
-These limits define how each SubscriptionManager behaves at creation time and are enforced on-chain.
-
-| Concept                 | Meaning                                           | Configurable |
-|-------------------------|--------------------------------------------------|--------------|
-| Subscriptions per manager | Maximum subscriptions allowed by issuer | Fixed (50,000) |
-| Secondary accounts per subscription | Additional non-owner accounts that can access the same subscription | Configurable (≤5) |
-| Modifications | Number of secondary account revocations | Configurable (≤20) |
-| Subscription per account | An account can belong to only one subscription  | Enforced |
-
-> Limits are defined at manager creation time via the Factory.
-
+👉 [Technical Specification](docs/technical-specification.md)
 
 ## 📜 License
 
