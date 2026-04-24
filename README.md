@@ -55,7 +55,7 @@ createSubscriptionManager(
 )
 ```
 
-### 2. Create subscription
+### 2. Create subscription (issuer)
 
 ```solidity
 createSubscription(address owner, uint256 planId, uint256 duration)
