@@ -7,7 +7,7 @@ Akxesa lets you eliminate your subscription database and verify access on-chain 
 ## ⚡  Quickstart (5 minutes)
 
 1. Create your SubscriptionManager → https://www.akxesa.com/app  
-2. Derive a deterministic address from your user ID (Auth0, Firebase, etc.)
+2. Derive a deterministic address from your user ID (Auth0, Firebase, etc.) using [Akxesa Universal ID Adapter](docs/getting-started/integrations/universal-id-adapter.md)
 3. Call `getAccess(address)` from your backend  
 
 That’s it. No subscription database required.
