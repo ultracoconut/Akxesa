@@ -106,7 +106,7 @@ Create and configure your own independent SubscriptionManager using the Akxesa a
 ### Backend integration
 Learn how to integrate Akxesa into your SaaS backend:
 
-👉 [Backend Integration Guide](docs/getting-started/backend-integration.md)
+👉 [Backend Integration Guide](docs/getting-started/integrations/backend-integration.md)
 
 ### Manual interaction (advanced)
 Interact directly with the contracts using Remix and MetaMask:
@@ -121,7 +121,7 @@ Complete smart contract interface reference
 
 ## 📄 Technical Specification
 
-Learn how Akxesa works under the hood, including its architecture, guarantees, and system limits.
+Learn how Akxesa works under the hood, including its architecture, account model, and system limits.
 
 👉 [Technical Specification](docs/technical-specification.md)
 
